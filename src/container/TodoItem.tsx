@@ -6,7 +6,7 @@ import { TodoContext } from "../context";
 export interface TodoItemProps extends Todo {}
 
 const TodoItem = (props: TodoItemProps) => {
-  const {editTodo, removeTodo } = useContext(TodoContext)
+  const { editTodo, removeTodo } = useContext(TodoContext)
 
   function onMarkAsCompleted(id: string, isCompleted?: boolean) {
     editTodo(id, 'isCompleted', !isCompleted)
