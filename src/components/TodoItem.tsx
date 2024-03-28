@@ -16,7 +16,7 @@ const TodoItem = ({
 }: TodoItemProps) => {
 
   function handleMarkAsCompleted() {
-    onMarkAsCompleted(id, !isCompleted)
+    onMarkAsCompleted(id, isCompleted)
   }
 
   function handleRemoveTodo() {
@@ -29,16 +29,25 @@ const TodoItem = ({
     <li style={{
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      flexDirection: 'column',
+      width: '100%'
     }}>
-      <div style={{ display: 'flex', flexDirection: 'column'}}>
-        <span>{text}</span>
-        <span>{updatedAtFormatted}</span>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+      }}>
+          <input type='checkbox' onChange={handleMarkAsCompleted} checked={isCompleted}/>
+        <span style={{
+            fontSize: '18px',
+            paddingLeft: '2px',
+            textDecoration: isCompleted ? 'line-through' : ''
+          }}>{text}</span>
+          <button onClick={handleRemoveTodo}>Remove</button>
       </div>
-      <div>
-        <button onClick={handleMarkAsCompleted}>Mark As Completed</button>
-        <button onClick={handleRemoveTodo}>Remove</button>
-      </div>
+      <span style={{ fontSize: '10px', marginTop: '6px' }}>{updatedAtFormatted}</span>
     </li>
   )
 }

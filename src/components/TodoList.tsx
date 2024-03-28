@@ -15,7 +15,7 @@ const TodoList = ({
 
   return (
     <div>
-      <ul>
+      <ul style={{ paddingLeft: 0}}>
         {children}
       </ul>
     </div>
