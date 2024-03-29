@@ -44,13 +44,25 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
     setTodoList(updatedTodoList)
   }
 
+  function markAll() {
+    const updatedTodoList = todoList.map(todo => ({ ...todo, isCompleted: !todo.isCompleted }))
+
+    setTodoList(updatedTodoList)
+  }
+
+  function removeAll() {
+    setTodoList([])
+  }
+
   return (
     <TodoContext.Provider
       value={{
         todoList,
         addTodo,
         editTodo,
-        removeTodo
+        removeTodo,
+        markAll,
+        removeAll
       }}
     >
       {children}
