@@ -1,3 +1,6 @@
+import { COLORS } from "./constants";
+import { TodoStatus, TodoStatusType } from "./types";
+
 export function formatDate(isoDateString: string) {
   const date = new Date(isoDateString);
 
@@ -10,4 +13,19 @@ export function formatDate(isoDateString: string) {
     second: '2-digit',
     timeZoneName: 'short'
   });
+}
+
+export function setStatusColorVariant(status: TodoStatusType) {
+  switch (status) {
+    case TodoStatus.IN_PROGRESS: {
+      return COLORS.BLUE
+    }
+    case TodoStatus.DONE: {
+      return COLORS.GREEN
+    }
+    case TodoStatus.PENDING:
+    default: {
+      return COLORS.GRAY
+    }
+  }
 }
