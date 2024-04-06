@@ -25,15 +25,10 @@ const TodoItem = (props: TodoItemProps) => {
     editTodo(id, 'title', task)
   }
 
-  function onEditDescription(id: string, description: string) {
-    editTodo(id, 'description', description)
-  }
-
   return <ListItem
     {...props}
     showEdit={showEdit}
     onEditTaskTitle={onEditTaskTitle}
-    onEditDescription={onEditDescription}
     onMarkAsCompleted={onMarkAsCompleted}
     onRemoveTodo={onRemoveTodo}
     onToggleEdit={onToggleEdit}
