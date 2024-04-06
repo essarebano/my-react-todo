@@ -5,8 +5,8 @@ import { TodoForm as Form } from "../components"
 const TodoForm = () => {
   const { addTodo, markAll, removeAll } = useContext(TodoContext)
 
-  function onAddTodo(text?: string) {
-    addTodo(text)
+  function onAddTodo(title?: string) {
+    addTodo(title)
   }
 
   function onMarkAllAsCompleted() {

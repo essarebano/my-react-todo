@@ -10,12 +10,13 @@ interface TodoContextProvider {
 const TodoContextProvider = ({ children }: TodoContextProvider) => {
   const [todoList, setTodoList] = useState<Todo[]>([])
 
-  function addTodo(text?: string) {
+  function addTodo(title: string = '') {
     const newTodo: Todo = {
       id: v4(),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      text: text ?? '',
+      title,
+      text: '',
       isCompleted: false
     }
 
