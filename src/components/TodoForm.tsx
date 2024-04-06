@@ -30,7 +30,7 @@ const TodoForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <input id='task-title' type='text' required/>
+      <input id='task-title' type='text' required placeholder="What will you do today?"/>
       <button type='submit'>Add</button>
       <div>
         <button onClick={handleOnMarkAllAsCompleted}>Mark All As Completed</button>
