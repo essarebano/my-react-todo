@@ -1,14 +1,14 @@
-export interface TodoFormProps {
+export interface TodoAddFormProps {
   onSubmit: (task: string) => void
   onMarkAllAsCompleted: () => void
   onRemoveAll: () => void
 }
 
-const TodoForm = ({
+const TodoAddForm = ({
   onSubmit,
   onMarkAllAsCompleted,
   onRemoveAll
-}: TodoFormProps) => {
+}: TodoAddFormProps) => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -40,4 +40,4 @@ const TodoForm = ({
   )
 }
 
-export default TodoForm
+export default TodoAddForm
