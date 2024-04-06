@@ -13,7 +13,7 @@ const TodoForm = ({
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    const task = ((e.target as HTMLFormElement).elements.namedItem('task') as HTMLInputElement).value
+    const task = ((e.target as HTMLFormElement).elements.namedItem('task-title') as HTMLInputElement).value
 
     onSubmit(task)
   }
@@ -30,8 +30,8 @@ const TodoForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <input id='task' type='text' />
-      <button type='submit'>Add Task</button>
+      <input id='task-title' type='text' required/>
+      <button type='submit'>Add</button>
       <div>
         <button onClick={handleOnMarkAllAsCompleted}>Mark All As Completed</button>
         <button onClick={handleOnRemoveAll}>Remove All</button>
