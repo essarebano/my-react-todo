@@ -4,7 +4,7 @@ import { Todo, TodoStatus, TodoStatusType } from "../utils/types"
 export interface TodoItemProps extends Todo {
   onMarkAsCompleted: (id: string, isCompleted: boolean) => void
   onRemoveTodo: (id: string) => void
-  onEditTaskTitle: (id: string, title: string) => void
+  onEditTitle: (id: string, title: string) => void
   onEditStatus: (id: string,  status: TodoStatusType) => void
   onToggleEdit: () => void
   showEdit: boolean
@@ -19,7 +19,7 @@ const TodoItem = ({
   updatedAt,
   showEdit,
   onToggleEdit,
-  onEditTaskTitle,
+  onEditTitle,
   onEditStatus,
   onMarkAsCompleted,
   onRemoveTodo
@@ -48,7 +48,7 @@ const TodoItem = ({
     e.preventDefault()
     const title = ((e.target as HTMLFormElement).elements.namedItem('task-title') as HTMLInputElement).value
 
-    onEditTaskTitle(id, title)
+    onEditTitle(id, title)
     onToggleEdit()
   }
 

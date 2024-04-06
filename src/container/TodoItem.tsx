@@ -21,7 +21,7 @@ const TodoItem = (props: TodoItemProps) => {
     setShowEdit(!showEdit)
   }
 
-  function onEditTaskTitle(id: string, task: string) {
+  function onEditTitle(id: string, task: string) {
     editTodo(id, 'title', task)
   }
 
@@ -32,7 +32,7 @@ const TodoItem = (props: TodoItemProps) => {
   return <ListItem
     {...props}
     showEdit={showEdit}
-    onEditTaskTitle={onEditTaskTitle}
+    onEditTitle={onEditTitle}
     onEditStatus={onEditStatus}
     onMarkAsCompleted={onMarkAsCompleted}
     onRemoveTodo={onRemoveTodo}
