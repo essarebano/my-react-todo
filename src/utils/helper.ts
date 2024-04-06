@@ -29,3 +29,8 @@ export function setStatusColorVariant(status: TodoStatusType) {
     }
   }
 }
+
+export function computePercentage(partialValue: number = 0, totalValue: number = 0) {
+  const result  = (totalValue) / (partialValue) * 100
+  return result ? result.toFixed(2) : 0;
+}
