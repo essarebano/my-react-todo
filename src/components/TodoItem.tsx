@@ -5,6 +5,7 @@ export interface TodoItemProps extends Todo {
   onMarkAsCompleted: (id: string, isCompleted: boolean) => void
   onRemoveTodo: (id: string) => void
   onEditTaskTitle: (id: string, title: string) => void
+  onEditDescription: (id: string, description: string) => void
   onToggleEdit: () => void
   showEdit: boolean
 }
@@ -12,12 +13,13 @@ export interface TodoItemProps extends Todo {
 const TodoItem = ({
   id,
   title,
-  text,
+  description,
   isCompleted,
   updatedAt,
   showEdit,
   onToggleEdit,
   onEditTaskTitle,
+  onEditDescription,
   onMarkAsCompleted,
   onRemoveTodo
 }: TodoItemProps) => {
@@ -38,8 +40,12 @@ const TodoItem = ({
   function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const title = ((e.target as HTMLFormElement).elements.namedItem('task-title') as HTMLInputElement).value
+    const description = ((e.target as HTMLFormElement).elements.namedItem('task-description') as HTMLInputElement).value
 
     onEditTaskTitle(id, title)
+    // TODO:improve this part
+    onEditDescription(id, description)
+    onToggleEdit()
   }
 
   const updatedAtFormatted = formatDate(updatedAt)
@@ -77,6 +83,19 @@ const TodoItem = ({
                 paddingLeft: '2px',
                 textDecoration: isCompleted ? 'line-through' : ''
               }}>{title}</h1>
+            )}
+          {showEdit
+            ? (
+              <input
+                type="text"
+                id='task-description'
+                defaultValue={description}
+              />
+            ) : (
+              <p style={{
+                paddingLeft: '2px',
+                textDecoration: isCompleted ? 'line-through' : ''
+              }}>{description}</p>
             )}
           <div style={{ display: 'flex'}}>
             {showEdit ?

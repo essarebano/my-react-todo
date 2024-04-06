@@ -16,7 +16,7 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       title,
-      text: '',
+      description: '',
       isCompleted: false
     }
 
