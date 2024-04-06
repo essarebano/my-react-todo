@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { TodoItem as ListItem } from "../components";
-import { Todo } from "../utils/types";
+import { Todo, TodoStatusType } from "../utils/types";
 import { TodoContext } from "../context";
 
 export interface TodoItemProps extends Todo {}
@@ -21,14 +21,19 @@ const TodoItem = (props: TodoItemProps) => {
     setShowEdit(!showEdit)
   }
 
-  function onEditTaskTitle(id: string, task: string) {
+  function onEditTitle(id: string, task: string) {
     editTodo(id, 'title', task)
+  }
+
+  function onEditStatus(id: string, status: TodoStatusType) {
+    editTodo(id, 'status', status)
   }
 
   return <ListItem
     {...props}
     showEdit={showEdit}
-    onEditTaskTitle={onEditTaskTitle}
+    onEditTitle={onEditTitle}
+    onEditStatus={onEditStatus}
     onMarkAsCompleted={onMarkAsCompleted}
     onRemoveTodo={onRemoveTodo}
     onToggleEdit={onToggleEdit}

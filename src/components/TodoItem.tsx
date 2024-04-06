@@ -1,10 +1,11 @@
-import { formatDate } from "../utils/helper"
-import { Todo } from "../utils/types"
+import { formatDate, setStatusColorVariant } from "../utils/helper"
+import { Todo, TodoStatus, TodoStatusType } from "../utils/types"
 
 export interface TodoItemProps extends Todo {
   onMarkAsCompleted: (id: string, isCompleted: boolean) => void
   onRemoveTodo: (id: string) => void
-  onEditTaskTitle: (id: string, title: string) => void
+  onEditTitle: (id: string, title: string) => void
+  onEditStatus: (id: string,  status: TodoStatusType) => void
   onToggleEdit: () => void
   showEdit: boolean
 }
@@ -14,10 +15,12 @@ const TodoItem = ({
   title,
   description,
   isCompleted,
+  status,
   updatedAt,
   showEdit,
   onToggleEdit,
-  onEditTaskTitle,
+  onEditTitle,
+  onEditStatus,
   onMarkAsCompleted,
   onRemoveTodo
 }: TodoItemProps) => {
@@ -35,15 +38,22 @@ const TodoItem = ({
     onToggleEdit()
   }
 
+  function handleStatusOnChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    e.preventDefault()
+    const status = e.target.value as TodoStatusType
+    onEditStatus(id, status)
+  }
+
   function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const title = ((e.target as HTMLFormElement).elements.namedItem('task-title') as HTMLInputElement).value
 
-    onEditTaskTitle(id, title)
+    onEditTitle(id, title)
     onToggleEdit()
   }
 
   const updatedAtFormatted = formatDate(updatedAt)
+  const todoStatusOption = [TodoStatus.PENDING, TodoStatus.IN_PROGRESS, TodoStatus.DONE]
 
   return (
     <li style={{
@@ -85,6 +95,23 @@ const TodoItem = ({
             textDecoration: isCompleted ? 'line-through' : ''
           }}>{description}</p>
           </div>
+          {showEdit ? (
+            <select
+              style={{ textTransform: 'capitalize' }}
+              defaultValue={status}
+              onChange={handleStatusOnChange}
+            >
+              {todoStatusOption.map(status => <option
+                style={{ textTransform: 'capitalize' }}
+                value={status}>{status}</option>)}
+            </select>
+          ): (
+              <p style={{
+                textTransform: 'capitalize',
+                fontWeight: 'bold',
+                color: setStatusColorVariant(status)
+              }}>{status}</p>
+          )}
           <div style={{ display: 'flex'}}>
             {showEdit ?
               <button type='submit'>Update</button> :
