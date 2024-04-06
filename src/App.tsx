@@ -1,12 +1,12 @@
 import './App.css'
 import { TodoContextProvider } from './context'
-import { TodoList, TodoForm } from './container'
+import { TodoList, TodoAddForm } from './container'
 
 function App() {
   return (
     <>
       <TodoContextProvider>
-        <TodoForm />
+        <TodoAddForm />
         <TodoList />
       </TodoContextProvider>
     </>

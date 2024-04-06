@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import { TodoContext } from "../context"
-import { TodoForm as Form } from "../components"
+import { TodoAddForm as AddForm } from "../components"
 
-const TodoForm = () => {
+const TodoAddForm = () => {
   const { addTodo, markAll, removeAll } = useContext(TodoContext)
 
-  function onAddTodo(text?: string) {
-    addTodo(text)
+  function onAddTodo(title?: string) {
+    addTodo(title)
   }
 
   function onMarkAllAsCompleted() {
@@ -17,11 +17,11 @@ const TodoForm = () => {
     removeAll()
   }
 
-  return <Form
+  return <AddForm
     onSubmit={onAddTodo}
     onMarkAllAsCompleted={onMarkAllAsCompleted}
     onRemoveAll={onRemoveAll}
   />
 }
 
-export default TodoForm
+export default TodoAddForm

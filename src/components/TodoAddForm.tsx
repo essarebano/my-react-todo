@@ -1,19 +1,19 @@
-export interface TodoFormProps {
+export interface TodoAddFormProps {
   onSubmit: (task: string) => void
   onMarkAllAsCompleted: () => void
   onRemoveAll: () => void
 }
 
-const TodoForm = ({
+const TodoAddForm = ({
   onSubmit,
   onMarkAllAsCompleted,
   onRemoveAll
-}: TodoFormProps) => {
+}: TodoAddFormProps) => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    const task = ((e.target as HTMLFormElement).elements.namedItem('task') as HTMLInputElement).value
+    const task = ((e.target as HTMLFormElement).elements.namedItem('task-title') as HTMLInputElement).value
 
     onSubmit(task)
   }
@@ -30,8 +30,8 @@ const TodoForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <input id='task' type='text' />
-      <button type='submit'>Add Task</button>
+      <input id='task-title' type='text' required placeholder="What will you do today?"/>
+      <button type='submit'>Add</button>
       <div>
         <button onClick={handleOnMarkAllAsCompleted}>Mark All As Completed</button>
         <button onClick={handleOnRemoveAll}>Remove All</button>
@@ -40,4 +40,4 @@ const TodoForm = ({
   )
 }
 
-export default TodoForm
+export default TodoAddForm

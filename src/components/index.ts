@@ -1,9 +1,9 @@
-import TodoForm from "./TodoForm";
+import TodoAddForm from "./TodoAddForm";
 import TodoItem from "./TodoItem";
 import TodoList from "./TodoList";
 
 export {
-  TodoForm,
+  TodoAddForm,
   TodoItem,
   TodoList
 }

@@ -4,19 +4,20 @@ import { Todo } from "../utils/types"
 export interface TodoItemProps extends Todo {
   onMarkAsCompleted: (id: string, isCompleted: boolean) => void
   onRemoveTodo: (id: string) => void
-  onEditTask: (id: string, text: string) => void
+  onEditTaskTitle: (id: string, title: string) => void
   onToggleEdit: () => void
   showEdit: boolean
 }
 
 const TodoItem = ({
   id,
-  text,
+  title,
+  description,
   isCompleted,
   updatedAt,
   showEdit,
   onToggleEdit,
-  onEditTask,
+  onEditTaskTitle,
   onMarkAsCompleted,
   onRemoveTodo
 }: TodoItemProps) => {
@@ -36,9 +37,10 @@ const TodoItem = ({
 
   function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const task = ((e.target as HTMLFormElement).elements.namedItem('task') as HTMLInputElement).value
+    const title = ((e.target as HTMLFormElement).elements.namedItem('task-title') as HTMLInputElement).value
 
-    onEditTask(id, task)
+    onEditTaskTitle(id, title)
+    onToggleEdit()
   }
 
   const updatedAtFormatted = formatDate(updatedAt)
@@ -64,20 +66,25 @@ const TodoItem = ({
             onChange={handleMarkAsCompleted}
             checked={isCompleted}
           />
+          <div style={{ display: 'flex', flexDirection: 'column'}}>
           {showEdit
             ? (
               <input
                 type="text"
-                id='task'
-                defaultValue={text}
+                id='task-title'
+                defaultValue={title}
               />
             ) : (
-              <span style={{
-                fontSize: '18px',
+              <h1 style={{
                 paddingLeft: '2px',
                 textDecoration: isCompleted ? 'line-through' : ''
-              }}>{text}</span>
+              }}>{title}</h1>
             )}
+          <p style={{
+            paddingLeft: '2px',
+            textDecoration: isCompleted ? 'line-through' : ''
+          }}>{description}</p>
+          </div>
           <div style={{ display: 'flex'}}>
             {showEdit ?
               <button type='submit'>Update</button> :
