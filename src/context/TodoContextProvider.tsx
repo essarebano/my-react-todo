@@ -3,6 +3,7 @@ import { TodoContext } from "./TodoContext"
 import { Todo, TodoStatus } from "../utils/types"
 import { v4 } from "uuid"
 import { TEXT } from "../utils/constants"
+import { computePercentage } from "../utils/helper"
 
 interface TodoContextProvider {
   children: React.ReactNode
@@ -57,10 +58,17 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
     setTodoList([])
   }
 
+  const numberOfTask = todoList.length ?? 0
+  const numberOfCompletedTask = todoList.filter(todo => todo.isCompleted === true).length ?? 0
+  const completionPercentage = Number(computePercentage(numberOfTask, numberOfCompletedTask))
+
   return (
     <TodoContext.Provider
       value={{
         todoList,
+        numberOfTask,
+        numberOfCompletedTask,
+        completionPercentage,
         addTodo,
         editTodo,
         removeTodo,
