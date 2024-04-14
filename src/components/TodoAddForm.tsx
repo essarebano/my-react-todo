@@ -1,13 +1,9 @@
 export interface TodoAddFormProps {
   onSubmit: (task: string) => void
-  onMarkAllAsCompleted: () => void
-  onRemoveAll: () => void
 }
 
 const TodoAddForm = ({
-  onSubmit,
-  onMarkAllAsCompleted,
-  onRemoveAll
+  onSubmit
 }: TodoAddFormProps) => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -18,24 +14,10 @@ const TodoAddForm = ({
     onSubmit(task)
   }
 
-  function handleOnMarkAllAsCompleted(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault()
-    onMarkAllAsCompleted()
-  }
-
-  function handleOnRemoveAll(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault()
-    onRemoveAll()
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <input id='task-title' type='text' required placeholder="What will you do today?"/>
       <button type='submit'>Add</button>
-      <div>
-        <button onClick={handleOnMarkAllAsCompleted}>Mark All As Completed</button>
-        <button onClick={handleOnRemoveAll}>Remove All</button>
-      </div>
     </form>
   )
 }
