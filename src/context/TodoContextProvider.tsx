@@ -12,6 +12,7 @@ interface TodoContextProvider {
 const TodoContextProvider = ({ children }: TodoContextProvider) => {
   const [todoList, setTodoList] = useState<Todo[]>([])
   const [filteredTodoList, setFilteredTodoList] = useState<Todo[]>([])
+  const [isFilteredByStatus, setIsFilteredByStatus] = useState<boolean>(false)
 
   function addTodo(title: string = '') {
     const newTodo: Todo = {
@@ -63,6 +64,11 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
     const updatedTodoList = todoList.filter(todo => todo.status === status)
 
     setFilteredTodoList(updatedTodoList)
+    setIsFilteredByStatus(true)
+  }
+
+  function resetFilters() {
+    setIsFilteredByStatus(false)
   }
 
   const numberOfTask = todoList.length ?? 0
@@ -74,6 +80,7 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
       value={{
         todoList,
         filteredTodoList,
+        isFilteredByStatus,
         numberOfTask,
         numberOfCompletedTask,
         completionPercentage,
@@ -82,7 +89,8 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
         removeTodo,
         markAll,
         removeAll,
-        filterByStatus
+        filterByStatus,
+        resetFilters
       }}
     >
       {children}

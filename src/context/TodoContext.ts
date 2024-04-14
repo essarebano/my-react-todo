@@ -7,17 +7,21 @@ export interface TodoContextObject {
   completionPercentage: number
   todoList: Todo[]
   filteredTodoList: Todo[]
+  // TODO: improve isFilteredByStatus
+  isFilteredByStatus: boolean
   addTodo: (text?: string) => void
   editTodo: <T extends keyof Todo>(taskId: string, key: T, value: Todo[T]) => void
   removeTodo: (taskId: string) => void
   markAll: () => void
   removeAll: () => void
   filterByStatus: (status: TodoStatusType) => void
+  resetFilters: () => void
 }
 
 export const TodoContext = createContext<TodoContextObject>({
   todoList: [],
   filteredTodoList: [],
+  isFilteredByStatus: false,
   numberOfTask: 0,
   numberOfCompletedTask: 0,
   completionPercentage: 0,
@@ -37,6 +41,9 @@ export const TodoContext = createContext<TodoContextObject>({
     throw new Error("Function not implemented")
   },
   filterByStatus: function (): void {
+    throw new Error("Function not implemented")
+  },
+  resetFilters: function (): void {
     throw new Error("Function not implemented")
   }
 })
