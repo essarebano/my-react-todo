@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { TodoContext } from "./TodoContext"
-import { Todo, TodoStatus } from "../utils/types"
+import { Todo, TodoStatus, TodoStatusType } from "../utils/types"
 import { v4 } from "uuid"
 import { TEXT } from "../utils/constants"
 import { computePercentage } from "../utils/helper"
@@ -11,6 +11,7 @@ interface TodoContextProvider {
 
 const TodoContextProvider = ({ children }: TodoContextProvider) => {
   const [todoList, setTodoList] = useState<Todo[]>([])
+  const [filteredTodoList, setFilteredTodoList] = useState<Todo[]>([])
 
   function addTodo(title: string = '') {
     const newTodo: Todo = {
@@ -18,7 +19,7 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       title,
-      description: TEXT.LOREM_IPSUM,
+      description: TEXT.DEFAULT,
       status: TodoStatus.PENDING,
       isCompleted: false
     }
@@ -58,6 +59,12 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
     setTodoList([])
   }
 
+  function filterByStatus(status: TodoStatusType) {
+    const updatedTodoList = todoList.filter(todo => todo.status === status)
+
+    setFilteredTodoList(updatedTodoList)
+  }
+
   const numberOfTask = todoList.length ?? 0
   const numberOfCompletedTask = todoList.filter(todo => todo.isCompleted === true).length ?? 0
   const completionPercentage = Number(computePercentage(numberOfTask, numberOfCompletedTask))
@@ -66,6 +73,7 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
     <TodoContext.Provider
       value={{
         todoList,
+        filteredTodoList,
         numberOfTask,
         numberOfCompletedTask,
         completionPercentage,
@@ -73,7 +81,8 @@ const TodoContextProvider = ({ children }: TodoContextProvider) => {
         editTodo,
         removeTodo,
         markAll,
-        removeAll
+        removeAll,
+        filterByStatus
       }}
     >
       {children}
