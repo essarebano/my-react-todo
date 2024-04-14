@@ -5,14 +5,18 @@ export interface TodoActionsProps {
   onMarkAllAsCompleted: () => void
   onRemoveAll: () => void
   onFilterByStatus: (status: TodoStatusType) => void
+  onResetFilter: () => void
   disabled: boolean
+  isFilteredByStatus: boolean
 }
 
 const TodoActions = ({
   onMarkAllAsCompleted,
   onRemoveAll,
   onFilterByStatus,
-  disabled
+  onResetFilter,
+  disabled,
+  isFilteredByStatus
 }: TodoActionsProps) => {
 
   function handleOnMarkAllAsCompleted(e: React.MouseEvent<HTMLButtonElement>) {
@@ -29,6 +33,11 @@ const TodoActions = ({
     e.preventDefault()
     const status = e.target.value as TodoStatusType
     onFilterByStatus(status)
+  }
+
+  function handleOnResetFilter(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault()
+    onResetFilter()
   }
 
   return (
@@ -55,6 +64,12 @@ const TodoActions = ({
             style={{ textTransform: 'capitalize' }}
             value={status}>{status}</option>)}
         </select>
+      </div>
+      <div style={{ marginTop: '8px'}}>
+        <button
+          onClick={handleOnResetFilter}
+          disabled={!isFilteredByStatus || disabled}
+        >Reset Filter</button>
       </div>
     </div>
   )
