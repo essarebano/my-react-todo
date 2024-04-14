@@ -20,10 +20,6 @@ const TodoActions = ({
     onRemoveAll()
   }
 
-  console.log({
-    disabled
-  })
-
   return (
     <div>
       <button
