@@ -1,5 +1,6 @@
+import { TODO_STATUS } from "../utils"
 import { formatDate, setStatusColorVariant } from "../utils/helper"
-import { Todo, TodoStatus, TodoStatusType } from "../utils/types"
+import { Todo, TodoStatusType } from "../utils/types"
 
 export interface TodoItemProps extends Todo {
   onMarkAsCompleted: (id: string, isCompleted: boolean) => void
@@ -53,7 +54,6 @@ const TodoItem = ({
   }
 
   const updatedAtFormatted = formatDate(updatedAt)
-  const todoStatusOption = [TodoStatus.PENDING, TodoStatus.IN_PROGRESS, TodoStatus.DONE]
 
   return (
     <li style={{
@@ -101,7 +101,7 @@ const TodoItem = ({
               defaultValue={status}
               onChange={handleStatusOnChange}
             >
-              {todoStatusOption.map(status => <option
+              {TODO_STATUS.map(status => <option
                 style={{ textTransform: 'capitalize' }}
                 value={status}>{status}</option>)}
             </select>

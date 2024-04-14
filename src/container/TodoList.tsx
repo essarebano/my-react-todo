@@ -4,12 +4,12 @@ import { TodoContext } from "../context"
 import { TodoItem as ListItem } from "../container"
 
 const TodoList = () => {
-  const { todoList } = useContext(TodoContext)
+  const { todoList, filteredTodoList, isFilteredByStatus } = useContext(TodoContext)
 
-  return <List
-    todoList={todoList}
-  >
-    {todoList.map(todo => <ListItem key={`todo-item_${todo.id}`} {...todo} />)}
+  const list = isFilteredByStatus ? filteredTodoList : todoList
+
+  return <List todoList={list}>
+    {list.map(todo => <ListItem key={`todo-item_${todo.id}`} {...todo} />)}
   </List>
 }
 

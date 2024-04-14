@@ -1,7 +1,7 @@
-import { COLORS } from "./constants";
-import { TEXT } from "./constants";
+import { COLORS, TEXT, TODO_STATUS } from "./constants";
 
 export {
   COLORS,
-  TEXT
+  TEXT,
+  TODO_STATUS
 }
